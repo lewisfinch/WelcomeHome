@@ -6,9 +6,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
-/**
- * 部门管理
- */
+
 @Mapper
 public interface ItemMapper {
 
