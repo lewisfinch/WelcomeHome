@@ -3,12 +3,13 @@ package com.wh.pojo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Item {
-    private int itemId;
+    private int itemID;
     private String iDescription;
     private String photo;
     private String color;
@@ -17,4 +18,5 @@ public class Item {
     private String material;
     private String mainCategory;
     private String subCategory;
+
 }

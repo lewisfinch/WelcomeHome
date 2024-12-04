@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Piece {
-    private int itemId;
+    private int itemID;
     private int pieceNum;
     private String pDescription;
     private int length;

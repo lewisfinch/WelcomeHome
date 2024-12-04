@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DonatedBy {
-    private int itemId;
+    private int itemID;
     private String userName;
     private Date donateDate;
 }
