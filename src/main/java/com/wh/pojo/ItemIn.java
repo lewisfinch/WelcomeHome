@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemIn {
-    private int itemId;
-    private int orderId;
+    private int itemID;
+    private int orderID;
     private boolean found;
 }
