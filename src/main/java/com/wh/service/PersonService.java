@@ -6,4 +6,6 @@ public interface PersonService {
 
     Person login(Person person);
 
+    String hashPassword(String password);
+
 }
