@@ -51,6 +51,16 @@ public class OrderController {
         return Result.success(itemList);
     }
 
+    @GetMapping("/getExistingCategory")
+    public Result getExistingCategory() {
+        List<Category> results = orderService.getExistingCategory();
+        if(results.isEmpty()) {
+            return Result.error("No categories found");
+        } else {
+            return Result.success(results);
+        }
+    }
+
     @PostMapping("/addToOrder")
     public Result addToOrder(@RequestBody OrderDTO orderDTO) {
         log.info(orderDTO.toString());

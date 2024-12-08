@@ -53,4 +53,9 @@ public interface OrderMapper {
     "GROUP BY i.mainCategory, i.subCategory " +
     "ORDER BY orderCount DESC")
     List<CategoryDTO> getPopularCategories(DateDTO dateDTO);
+
+
+    @Select("SELECT DISTINCT mainCategory, subCategory " +
+            "FROM Category")
+    List<Category> getExistingCategory();
 }

@@ -28,6 +28,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Category> getExistingCategory() {
+        return orderMapper.getExistingCategory();
+    }
+
+    @Override
     public boolean addToOrder(OrderDTO orderDTO) {
         Ordered ordered = new Ordered();
         ItemIn itemIn = new ItemIn();
