@@ -1,5 +1,7 @@
 package com.wh.controller;
 
+import com.wh.dto.CategoryDTO;
+import com.wh.dto.DateDTO;
 import com.wh.dto.OrderDTO;
 import com.wh.dto.RelevantOrderDTO;
 import com.wh.pojo.*;
@@ -67,6 +69,16 @@ public class OrderController {
             return Result.error("No relevant orders found");
         }
         return Result.success(orders);
+    }
+
+    @GetMapping("/popularCategories")
+    public Result popularCategories(@RequestBody DateDTO dateDTO) {
+        List<CategoryDTO> results = orderService.getPopularCategories(dateDTO);
+        if(results.isEmpty()) {
+            return Result.error("No popular categories found");
+        } else {
+            return Result.success(results);
+        }
     }
 
 }

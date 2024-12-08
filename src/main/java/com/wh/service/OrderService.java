@@ -1,5 +1,7 @@
 package com.wh.service;
 
+import com.wh.dto.CategoryDTO;
+import com.wh.dto.DateDTO;
 import com.wh.dto.OrderDTO;
 import com.wh.dto.RelevantOrderDTO;
 import com.wh.pojo.*;
@@ -17,4 +19,6 @@ public interface OrderService {
     boolean addToOrder(OrderDTO orderDTO);
 
     List<RelevantOrderDTO> getRelevantOrders(Person person);
+
+    List<CategoryDTO> getPopularCategories(DateDTO dateDTO);
 }

@@ -1,8 +1,6 @@
 package com.wh.mapper;
 
-import com.wh.dto.OrderItemLocationDTO;
-import com.wh.dto.PieceLocationDTO;
-import com.wh.dto.RelevantOrderDTO;
+import com.wh.dto.*;
 import com.wh.pojo.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -46,4 +44,13 @@ public interface OrderMapper {
             "LEFT JOIN Delivered del ON o.orderID = del.orderID " +
             "WHERE #{userName} IN (o.supervisor, o.client, d.username, del.userName)")
     List<RelevantOrderDTO> getRelevantOrders(Person person);
+
+    @Select("SELECT i.mainCategory,i.subCategory,COUNT(DISTINCT o.orderID) AS orderCount " +
+    "FROM Ordered o " +
+    "JOIN ItemIn ii ON o.orderID = ii.orderID " +
+    "JOIN Item i ON ii.itemID = i.itemID " +
+    "WHERE o.orderDate BETWEEN #{startDate} AND #{endDate} " +
+    "GROUP BY i.mainCategory, i.subCategory " +
+    "ORDER BY orderCount DESC")
+    List<CategoryDTO> getPopularCategories(DateDTO dateDTO);
 }

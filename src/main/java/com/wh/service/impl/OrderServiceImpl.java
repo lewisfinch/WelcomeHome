@@ -1,5 +1,7 @@
 package com.wh.service.impl;
 
+import com.wh.dto.CategoryDTO;
+import com.wh.dto.DateDTO;
 import com.wh.dto.OrderDTO;
 import com.wh.dto.RelevantOrderDTO;
 import com.wh.mapper.OrderMapper;
@@ -18,6 +20,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<RelevantOrderDTO> getRelevantOrders(Person person) {
         return orderMapper.getRelevantOrders(person);
+    }
+
+    @Override
+    public List<CategoryDTO> getPopularCategories(DateDTO dateDTO) {
+        return orderMapper.getPopularCategories(dateDTO);
     }
 
     @Override
