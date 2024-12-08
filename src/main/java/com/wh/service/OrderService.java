@@ -1,12 +1,8 @@
 package com.wh.service;
 
 import com.wh.dto.OrderDTO;
-import com.wh.dto.OrderItemLocationDTO;
-import com.wh.dto.PieceLocationDTO;
-import com.wh.pojo.Category;
-import com.wh.pojo.Item;
-import com.wh.pojo.ItemIn;
-import com.wh.pojo.Ordered;
+import com.wh.dto.RelevantOrderDTO;
+import com.wh.pojo.*;
 
 import java.util.List;
 
@@ -19,4 +15,6 @@ public interface OrderService {
     List<Item> getCategory(Category category);
 
     boolean addToOrder(OrderDTO orderDTO);
+
+    List<RelevantOrderDTO> getRelevantOrders(Person person);
 }

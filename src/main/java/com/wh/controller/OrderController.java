@@ -1,6 +1,7 @@
 package com.wh.controller;
 
 import com.wh.dto.OrderDTO;
+import com.wh.dto.RelevantOrderDTO;
 import com.wh.pojo.*;
 import com.wh.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
@@ -57,6 +58,15 @@ public class OrderController {
         } else {
             return Result.error("Failed to add to the order");
         }
+    }
+
+    @GetMapping("/userTasks")
+    public Result userTasks(@RequestBody Person person) {
+        List<RelevantOrderDTO> orders = orderService.getRelevantOrders(person);
+        if(orders.isEmpty()) {
+            return Result.error("No relevant orders found");
+        }
+        return Result.success(orders);
     }
 
 }

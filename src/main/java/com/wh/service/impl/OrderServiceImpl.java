@@ -1,11 +1,9 @@
 package com.wh.service.impl;
 
 import com.wh.dto.OrderDTO;
+import com.wh.dto.RelevantOrderDTO;
 import com.wh.mapper.OrderMapper;
-import com.wh.pojo.Category;
-import com.wh.pojo.Item;
-import com.wh.pojo.ItemIn;
-import com.wh.pojo.Ordered;
+import com.wh.pojo.*;
 import com.wh.service.OrderService;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +13,13 @@ import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+
+
+    @Override
+    public List<RelevantOrderDTO> getRelevantOrders(Person person) {
+        return orderMapper.getRelevantOrders(person);
+    }
+
     @Override
     public boolean addToOrder(OrderDTO orderDTO) {
         Ordered ordered = new Ordered();

@@ -2,10 +2,8 @@ package com.wh.mapper;
 
 import com.wh.dto.OrderItemLocationDTO;
 import com.wh.dto.PieceLocationDTO;
-import com.wh.pojo.Category;
-import com.wh.pojo.Item;
-import com.wh.pojo.ItemIn;
-import com.wh.pojo.Ordered;
+import com.wh.dto.RelevantOrderDTO;
+import com.wh.pojo.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -39,4 +37,13 @@ public interface OrderMapper {
     @Insert("INSERT INTO Itemin (itemID, orderID, found) " +
             "VALUES (#{itemID}, #{orderID}, #{found})")
     boolean addToItemIn(ItemIn itemIn);
+
+    @Select("SELECT o.orderID, o.orderDate, o.supervisor, o.client, i.itemID, i.iDescription, d.username AS donor, d.donateDate, del.userName as deliveredBy, del.date as deliverDate, del.status " +
+            "FROM Ordered o " +
+            "LEFT JOIN ItemIn ii ON o.orderID = ii.orderID " +
+            "LEFT JOIN Item i ON ii.itemID = i.itemID " +
+            "LEFT JOIN Donatedby d ON i.itemID = d.itemID " +
+            "LEFT JOIN Delivered del ON o.orderID = del.orderID " +
+            "WHERE #{userName} IN (o.supervisor, o.client, d.username, del.userName)")
+    List<RelevantOrderDTO> getRelevantOrders(Person person);
 }
