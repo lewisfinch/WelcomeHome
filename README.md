@@ -170,3 +170,10 @@ WHERE o.orderDate BETWEEN #{startDate} AND #{endDate}
 GROUP BY i.mainCategory, i.subCategory 
 ORDER BY orderCount DESC
 ```
+## Contribution
+- Yicheng Zhai
+  - Built the back-end system
+  - Implemented 2 basic features and 2 additional features
+- Yixin Jiang
+  - Built the front-end system
+  - Implemented 2 basic features and 2 additional features
