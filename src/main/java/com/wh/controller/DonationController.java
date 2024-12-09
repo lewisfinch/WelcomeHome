@@ -17,8 +17,8 @@ public class DonationController {
     private DonationService donationService;
 
     @GetMapping("/isStaff")
-    public Result isStaff(@RequestBody Person person) {
-        String userName = person.getUserName();
+    public Result isStaff(@RequestParam String userName) {
+
         boolean result = donationService.isStaff(userName);
         if (result) {
             return Result.success("Permission Granted");

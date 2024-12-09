@@ -21,15 +21,13 @@ public class OrderServiceImpl implements OrderService {
     public List<RelevantOrderDTO> getRelevantOrders(Person person) {
         return orderMapper.getRelevantOrders(person);
     }
-
-    @Override
-    public List<CategoryDTO> getPopularCategories(DateDTO dateDTO) {
-        return orderMapper.getPopularCategories(dateDTO);
-    }
-
     @Override
     public List<Category> getExistingCategory() {
         return orderMapper.getExistingCategory();
+    }
+    @Override
+    public List<CategoryDTO> getPopularCategories(DateDTO dateDTO) {
+        return orderMapper.getPopularCategories(dateDTO);
     }
 
     @Override

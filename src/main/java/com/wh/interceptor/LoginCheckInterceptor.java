@@ -24,6 +24,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
         String jwt = request.getHeader("token");
 
+        if(jwt== null||jwt.isEmpty()){return true;}
+
         if(!StringUtils.hasLength(jwt)){
             log.info("JWT is empty");
             Result error = Result.error("NOT_LOGIN");
@@ -51,9 +53,11 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        System.out.println("postHandle");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println("afterCompletion");
     }
 }

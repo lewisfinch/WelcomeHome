@@ -21,6 +21,5 @@ public interface OrderService {
     List<RelevantOrderDTO> getRelevantOrders(Person person);
 
     List<CategoryDTO> getPopularCategories(DateDTO dateDTO);
-
     List<Category> getExistingCategory();
 }

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+import java.sql.Date;
 
 @Slf4j
 @RequestMapping("/order")
@@ -22,8 +22,8 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping("/checkUserName")
-    public Result checkUserName(@RequestBody Person person) {
-        String userName = person.getUserName();
+    public Result checkUserName(@RequestParam String userName) {
+
         boolean result = orderService.checkUserName(userName);
         if (result) {
             return Result.success("Valid userName");
@@ -35,7 +35,7 @@ public class OrderController {
     @GetMapping("/newOrder")
     public Result newOrder() {
         int orderID = orderService.newOrder();
-        if(orderID > 0) {
+        if (orderID > 0) {
             return Result.success(orderID);
         } else {
             return Result.error("Failed to create new order");
@@ -50,7 +50,6 @@ public class OrderController {
         }
         return Result.success(itemList);
     }
-
     @GetMapping("/getExistingCategory")
     public Result getExistingCategory() {
         List<Category> results = orderService.getExistingCategory();
@@ -65,7 +64,7 @@ public class OrderController {
     public Result addToOrder(@RequestBody OrderDTO orderDTO) {
         log.info(orderDTO.toString());
         boolean result = orderService.addToOrder(orderDTO);
-        if(result) {
+        if (result) {
             return Result.success("Successfully added to the order");
         } else {
             return Result.error("Failed to add to the order");
@@ -73,22 +72,39 @@ public class OrderController {
     }
 
     @GetMapping("/userTasks")
-    public Result userTasks(@RequestBody Person person) {
+    public Result userTasks(@RequestParam String userName) {
+        Person person = new Person();
+        person.setUserName(userName);
         List<RelevantOrderDTO> orders = orderService.getRelevantOrders(person);
-        if(orders.isEmpty()) {
+        if (orders.isEmpty()) {
             return Result.error("No relevant orders found");
         }
         return Result.success(orders);
     }
 
+
     @GetMapping("/popularCategories")
-    public Result popularCategories(@RequestBody DateDTO dateDTO) {
-        List<CategoryDTO> results = orderService.getPopularCategories(dateDTO);
-        if(results.isEmpty()) {
-            return Result.error("No popular categories found");
-        } else {
-            return Result.success(results);
+    public Result popularCategories(@RequestParam String startDate, @RequestParam String endDate) {
+        try {
+            // 将字符串转换为 java.sql.Date
+            Date start = Date.valueOf(startDate);
+            Date end = Date.valueOf(endDate);
+
+            // 构造 DateDTO 对象
+            DateDTO dateDTO = new DateDTO();
+            dateDTO.setStartDate(start);
+            dateDTO.setEndDate(end);
+
+            // 调用服务层方法
+            List<CategoryDTO> results = orderService.getPopularCategories(dateDTO);
+
+            if (results.isEmpty()) {
+                return Result.error("No popular categories found");
+            } else {
+                return Result.success(results);
+            }
+        } catch (IllegalArgumentException e) {
+            return Result.error("Invalid date format. Please use yyyy-MM-dd.");
         }
     }
-
 }
