@@ -28,7 +28,6 @@ public class PersonServiceImpl implements PersonService {
         return personMapper.getByUsernameAndPassword(user);
     }
 //    public Person login(Person person) {
-//        // 不加密，直接查询
 //        Person user = new Person();
 //        user.setUserName(person.getUserName());
 //        user.setPassword(person.getPassword());

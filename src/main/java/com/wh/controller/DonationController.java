@@ -28,8 +28,8 @@ public class DonationController {
     }
 
     @GetMapping("/isDonor")
-    public Result isDonor(@RequestBody Person person) {
-        String userName = person.getUserName();
+    public Result isDonor(@RequestParam String userName) {
+
         boolean result = donationService.isDonor(userName);
         if (result) {
             return Result.success("Access Granted");

@@ -33,8 +33,11 @@ public class OrderController {
     }
 
     @GetMapping("/newOrder")
-    public Result newOrder() {
-        int orderID = orderService.newOrder();
+    public Result newOrder(@RequestParam String client, String supervisor) {
+        Ordered ordered=new Ordered();
+        ordered.setSupervisor(supervisor);
+        ordered.setClient(client);
+        int orderID = orderService.newOrder(ordered);
         if (orderID > 0) {
             return Result.success(orderID);
         } else {
@@ -43,7 +46,8 @@ public class OrderController {
     }
 
     @GetMapping("/getCategory")
-    public Result getCategory(@RequestBody Category category) {
+    public Result getCategory(@RequestParam String mainCategory, String subCategory) {
+        Category category=new Category(mainCategory,subCategory,"NOnOtes");
         List<Item> itemList = orderService.getCategory(category);
         if (itemList.isEmpty()) {
             return Result.error("No items found for category: " + category.getMainCategory() + ", " + category.getSubCategory());

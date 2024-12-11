@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 public class welcomeHomeApplication implements CommandLineRunner {
 
     @Autowired
-    private DataSource dataSource; // 数据源对象，用于测试数据库连接
+    private DataSource dataSource;
 
     public static void main(String[] args) {
         SpringApplication.run(welcomeHomeApplication.class, args);

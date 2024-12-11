@@ -57,4 +57,5 @@ public interface OrderMapper {
     @Select("SELECT DISTINCT mainCategory, subCategory " +
             "FROM Category")
     List<Category> getExistingCategory();
+
 }

@@ -81,7 +81,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int newOrder() {
-        return orderMapper.newOrder() + 1;
+    public int newOrder(Ordered ordered) {
+        int orderID = orderMapper.newOrder() + 1;
+        Ordered newOrder = new Ordered();
+        newOrder.setOrderID(orderID);
+        newOrder.setOrderDate(Date.valueOf(LocalDate.now()));
+        newOrder.setSupervisor(ordered.getSupervisor());
+        newOrder.setClient(ordered.getClient());
+        orderMapper.addToOrder(newOrder);
+        return orderID;
     }
 }
