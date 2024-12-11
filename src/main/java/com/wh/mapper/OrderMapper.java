@@ -36,7 +36,7 @@ public interface OrderMapper {
             "VALUES (#{itemID}, #{orderID}, #{found})")
     boolean addToItemIn(ItemIn itemIn);
 
-    @Select("SELECT o.orderID, o.orderDate, o.supervisor, o.client, i.itemID, i.iDescription, d.username AS donor, d.donateDate, del.userName as deliveredBy, del.date as deliverDate, del.status " +
+    @Select("SELECT o.orderID, o.orderDate, o.supervisor, o.client, i.itemID, i.iDescription, d.username AS donor, d.donateDate, del.userName as deliveredBy, del.date as deliveredDate, del.status " +
             "FROM Ordered o " +
             "LEFT JOIN ItemIn ii ON o.orderID = ii.orderID " +
             "LEFT JOIN Item i ON ii.itemID = i.itemID " +
@@ -57,5 +57,10 @@ public interface OrderMapper {
     @Select("SELECT DISTINCT mainCategory, subCategory " +
             "FROM Category")
     List<Category> getExistingCategory();
+
+    @Select("SELECT o.orderID, o.orderDate, o.orderNotes, o.supervisor, o.client " +
+    "FROM Ordered o " +
+    "WHERE o.orderID = #{orderID}")
+    Ordered getCurrentOrder(@Param("orderID") String orderID);
 
 }

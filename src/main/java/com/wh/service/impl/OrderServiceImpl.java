@@ -31,33 +31,20 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean addToOrder(OrderDTO orderDTO) {
-        Ordered ordered = new Ordered();
-        ItemIn itemIn = new ItemIn();
-        Date current = Date.valueOf(LocalDate.now());
+    public Ordered getCurrentOrder(String orderID) {
+        return orderMapper.getCurrentOrder(orderID);
+    }
 
-        ordered.setOrderID(Integer.parseInt(orderDTO.getOrderID()));
-        ordered.setOrderDate(current);
-        ordered.setOrderNotes(orderDTO.getOrderNotes());
-        ordered.setClient(orderDTO.getClient());
-        ordered.setSupervisor(orderDTO.getSupervisor());
+    @Override
+    public boolean addToOrder(OrderDTO orderDTO) {
+        ItemIn itemIn = new ItemIn();
 
         itemIn.setOrderID(Integer.parseInt(orderDTO.getOrderID()));
         itemIn.setItemID(Integer.parseInt(orderDTO.getItemID()));
         itemIn.setFound(true);
 
         try {
-            boolean orderAdded = orderMapper.addToOrder(ordered);
-            if (!orderAdded) {
-                return false;
-            }
-
-            boolean itemAdded = orderMapper.addToItemIn(itemIn);
-            if (!itemAdded) {
-                return false;
-            }
-
-            return true;
+            return orderMapper.addToItemIn(itemIn);
         } catch (Exception e) {
             return false;
         }

@@ -19,6 +19,6 @@ public class RelevantOrderDTO {
     private String donor;
     private Date donateDate;
     private String deliveredBy;
-    private String deliveredDate;
+    private Date deliveredDate;
     private String status;
 }

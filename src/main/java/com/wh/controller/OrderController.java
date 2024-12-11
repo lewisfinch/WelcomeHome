@@ -33,10 +33,10 @@ public class OrderController {
     }
 
     @GetMapping("/newOrder")
-    public Result newOrder(@RequestParam String client, String supervisor) {
-        Ordered ordered=new Ordered();
-        ordered.setSupervisor(supervisor);
+    public Result newOrder(@RequestParam String client, @RequestParam String supervisor) {
+        Ordered ordered = new Ordered();
         ordered.setClient(client);
+        ordered.setSupervisor(supervisor);
         int orderID = orderService.newOrder(ordered);
         if (orderID > 0) {
             return Result.success(orderID);
@@ -72,6 +72,16 @@ public class OrderController {
             return Result.success("Successfully added to the order");
         } else {
             return Result.error("Failed to add to the order");
+        }
+    }
+
+    @GetMapping("/getCurrentOrder")
+    public Result getCurrentOrder(@RequestParam String orderID) {
+        Ordered ordered = orderService.getCurrentOrder(orderID);
+        if (ordered == null) {
+            return Result.error("No current order found");
+        } else {
+            return Result.success(ordered);
         }
     }
 
