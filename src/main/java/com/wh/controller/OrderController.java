@@ -1,5 +1,6 @@
 package com.wh.controller;
 
+import com.wh.annotation.Log;
 import com.wh.dto.CategoryDTO;
 import com.wh.dto.DateDTO;
 import com.wh.dto.OrderDTO;
@@ -85,6 +86,7 @@ public class OrderController {
         }
     }
 
+    @Log
     @GetMapping("/userTasks")
     public Result userTasks(@RequestParam String userName) {
         Person person = new Person();
